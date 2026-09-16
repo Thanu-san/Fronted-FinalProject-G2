@@ -1,29 +1,20 @@
-import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
-  variable: "--font-inter",
   subsets: ["latin"],
+  variable: "--font-inter",
 });
 
-export const metadata: Metadata = {
-  title: "Apple E-Commerce | Group 2",
-  description: "E-commerce platform inspired by Apple - Final Project Group 2",
+export const metadata = {
+  title: "ShopNow",
+  description: "Better Products, Brighter Days",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${inter.variable} font-sans antialiased min-h-screen flex flex-col`}
-      >
-        {children}
-      </body>
+      <body className={inter.variable}>{children}</body>
     </html>
   );
 }
