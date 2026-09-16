@@ -5,9 +5,9 @@
   --foreground: #171717;
 
   /* Design System Colors */
-  --primary: #4F46E5;    /* Indigo */
-  --secondary: #EEF2FF;  /* Soft Lavender */
-  --accent: #8B5CF6;     /* Violet */
+  --primary: #4f46e5; /* Indigo */
+  --secondary: #eef2ff; /* Soft Lavender */
+  --accent: #8b5cf6; /* Violet */
 }
 
 @theme inline {
@@ -16,8 +16,7 @@
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
   --color-accent: var(--accent);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -30,5 +29,5 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
 }

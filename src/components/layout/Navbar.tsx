@@ -18,6 +18,9 @@ export default function Navbar() {
           >
             Products
           </Link>
+          <Link href="/table" className="hover:text-primary transition-colors">
+            Table
+          </Link>
           <Link href="/about" className="hover:text-primary transition-colors">
             About
           </Link>
