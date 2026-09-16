@@ -1,10 +1,17 @@
-import React from "react";
+import Hero from "@/components/home/Hero";
+import Categories from "@/components/home/Categories";
+import FeaturedProducts from "@/components/home/FeaturedProducts";
+import PromoBanner from "@/components/home/PromoBanner";
+import Newsletter from "@/components/home/Newsletter";
 
 export default function HomePage() {
   return (
-    <main className="flex-1 flex flex-col items-center justify-center p-8 text-center">
-      <h1 className="text-4xl font-bold tracking-tight">Apple E-Commerce</h1>
-      <p className="text-zinc-500 mt-2">Group 2 Final Project</p>
+    <main>
+      <Hero />
+      <Categories />
+      <FeaturedProducts />
+      <PromoBanner />
+      <Newsletter />
     </main>
   );
 }
