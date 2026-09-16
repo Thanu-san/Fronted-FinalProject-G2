@@ -11,7 +11,7 @@ export default function HeroSection() {
       <div className="mt-6 flex gap-4">
         <Link
           href="/products"
-          className="rounded-full bg-blue-600 px-5 py-2 text-sm text-white hover:bg-blue-700 transition-colors"
+          className="rounded-full bg-primary px-5 py-2 text-sm text-white hover:bg-accent transition-colors"
         >
           Explore Store
         </Link>

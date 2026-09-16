@@ -20,9 +20,7 @@ export default function ProductCard({
         Image Placeholder
       </div>
       <div className="mt-4">
-        <span className="text-xs text-zinc-400 uppercase tracking-wider">
-          {category}
-        </span>
+        <span className="text-xs text-zinc-400 uppercase tracking-wider">{category}</span>
         <h3 className="text-lg font-bold mt-1">{name}</h3>
         <p className="text-sm font-semibold mt-1">${price}</p>
       </div>
@@ -35,3 +33,4 @@ export default function ProductCard({
     </div>
   );
 }
+

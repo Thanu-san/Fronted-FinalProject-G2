@@ -28,13 +28,13 @@ export default function ErrorPage({ error, reset }: ErrorProps) {
       <div className="mt-8 flex gap-4">
         <button
           onClick={() => reset()}
-          className="px-5 py-2.5 rounded-full bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition-colors cursor-pointer"
+          className="px-5 py-2.5 rounded-full bg-primary text-white text-sm font-medium hover:bg-accent transition-colors cursor-pointer"
         >
           Try Again
         </button>
         <Link
           href="/"
-          className="px-5 py-2.5 rounded-full border border-zinc-300 dark:border-zinc-700 text-sm font-medium hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+          className="px-5 py-2.5 rounded-full border border-zinc-300 dark:border-zinc-700 text-sm font-medium hover:bg-secondary dark:hover:bg-zinc-800 transition-colors"
         >
           Go to Homepage
         </Link>

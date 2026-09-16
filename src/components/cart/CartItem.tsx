@@ -14,10 +14,9 @@ export default function CartItem() {
       </div>
       <div className="flex items-center gap-3">
         <span className="text-xs">Qty: 1</span>
-        <button className="text-xs text-rose-500 hover:underline">
-          Remove
-        </button>
+        <button className="text-xs text-rose-500 hover:underline">Remove</button>
       </div>
     </div>
   );
 }
+

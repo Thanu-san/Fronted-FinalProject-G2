@@ -11,7 +11,7 @@ export default function LoginForm() {
         <input
           type="email"
           placeholder="name@example.com"
-          className="w-full rounded-xl border border-zinc-300 p-3 text-sm dark:border-zinc-700 dark:bg-zinc-800"
+          className="w-full rounded-xl border border-zinc-300 p-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary dark:border-zinc-700 dark:bg-zinc-800"
         />
       </div>
       <div>
@@ -21,18 +21,18 @@ export default function LoginForm() {
         <input
           type="password"
           placeholder="••••••••"
-          className="w-full rounded-xl border border-zinc-300 p-3 text-sm dark:border-zinc-700 dark:bg-zinc-800"
+          className="w-full rounded-xl border border-zinc-300 p-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary dark:border-zinc-700 dark:bg-zinc-800"
         />
       </div>
       <button
         type="submit"
-        className="w-full rounded-full bg-blue-600 py-3 text-sm font-semibold text-white hover:bg-blue-700 transition-colors"
+        className="w-full rounded-full bg-primary py-3 text-sm font-semibold text-white hover:bg-accent transition-colors"
       >
         Sign In
       </button>
       <p className="text-center text-xs text-zinc-500">
         Don&apos;t have an account?{" "}
-        <Link href="/register" className="text-blue-600 hover:underline">
+        <Link href="/register" className="text-primary hover:underline">
           Create one now
         </Link>
       </p>

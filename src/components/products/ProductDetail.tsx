@@ -16,7 +16,7 @@ export default function ProductDetail({ slug }: ProductDetailComponentProps) {
           Route Slug: {slug?.join(" / ") || "Default"}
         </p>
         <div className="text-2xl font-semibold">$999</div>
-        <button className="w-full sm:w-auto rounded-full bg-blue-600 px-6 py-3 text-sm font-medium text-white hover:bg-blue-700 transition-colors">
+        <button className="w-full sm:w-auto rounded-full bg-primary px-6 py-3 text-sm font-medium text-white hover:bg-accent transition-colors">
           Add to Bag
         </button>
       </div>
