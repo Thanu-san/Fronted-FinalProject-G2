@@ -16,7 +16,7 @@ export default function CartSummary() {
         <span>Total</span>
         <span>$999.00</span>
       </div>
-      <button className="w-full rounded-full bg-blue-600 py-3 text-sm font-semibold text-white hover:bg-blue-700 transition-colors">
+      <button className="w-full rounded-full bg-primary py-3 text-sm font-semibold text-white hover:bg-accent transition-colors">
         Checkout
       </button>
     </div>

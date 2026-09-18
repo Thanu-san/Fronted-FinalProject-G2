@@ -1,18 +1,11 @@
 import React from "react";
 
-const MEMBERS = [
-  "Leader / Frontend Architect",
-  "UI / UX Designer",
-  "Developer",
-  "QA Engineer",
-];
+const MEMBERS = ["Leader / Frontend Architect", "UI / UX Designer", "Developer", "QA Engineer"];
 
 export default function TeamSection() {
   return (
     <section className="py-12">
-      <h2 className="text-2xl font-bold mb-6 text-center">
-        Group 2 Team Members
-      </h2>
+      <h2 className="text-2xl font-bold mb-6 text-center">Group 2 Team Members</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
         {MEMBERS.map((role, i) => (
           <div
@@ -30,3 +23,4 @@ export default function TeamSection() {
     </section>
   );
 }
+
