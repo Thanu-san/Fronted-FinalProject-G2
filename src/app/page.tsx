@@ -3,14 +3,24 @@ import Categories from "@/components/home/Categories";
 import FeaturedProducts from "@/components/home/FeaturedProducts";
 import PromoBanner from "@/components/home/PromoBanner";
 import Newsletter from "@/components/home/Newsletter";
+import { getProducts } from "@/services/product";
+import type { Product } from "@/types/product";
 
-export default function HomePage() {
+export default async function HomePage() {
+  let products: Product[] = [];
+  try {
+    const data = await getProducts(0);
+    products = data.content || [];
+  } catch (err) {
+    console.error("HomePage: Failed to load products from API:", err);
+  }
+
   return (
     <main>
-      <Hero />
-      <Categories />
+      <Hero products={products} />
+      <Categories products={products} />
       <FeaturedProducts />
-      <PromoBanner />
+      <PromoBanner products={products} />
       <Newsletter />
     </main>
   );
