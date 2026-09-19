@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import type { ComputerSpec, Product } from "@/types/product";
+import { useCart } from "@/context/CartContext";
 
 interface ProductDetailProps {
   product: Product;
@@ -19,13 +20,29 @@ const specifications: [keyof ComputerSpec, string][] = [
 ];
 
 export default function ProductDetail({ product }: ProductDetailProps) {
+  const { addItem } = useCart();
   const images = [...new Set([product.thumbnail, ...(product.images ?? [])])]
     .filter((image): image is string => typeof image === "string" && /^https?:\/\//i.test(image));
   const [selectedImage, setSelectedImage] = useState(images[0] ?? null);
   const [failedImages, setFailedImages] = useState<string[]>([]);
   const [quantity, setQuantity] = useState(1);
+  const [added, setAdded] = useState(false);
   const inStock = product.availability && product.stockQuantity > 0;
   const price = product.priceOut.toLocaleString("en-US", { style: "currency", currency: "USD" });
+
+  const handleAddToCart = () => {
+    addItem(
+      {
+        id: product.uuid,
+        name: product.name,
+        price: product.priceOut,
+        image: product.thumbnail ?? undefined,
+        category: product.category?.name,
+      },
+      quantity,
+    );
+    setAdded(true);
+  };
 
   return (
     <main className="products-container product-detail">
@@ -83,7 +100,10 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 type="button"
                 aria-label="Decrease quantity"
                 disabled={!inStock || quantity <= 1}
-                onClick={() => setQuantity(quantity - 1)}
+                onClick={() => {
+                  setQuantity(quantity - 1);
+                  setAdded(false);
+                }}
               >
                 -
               </button>
@@ -92,17 +112,29 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 type="button"
                 aria-label="Increase quantity"
                 disabled={!inStock || quantity >= product.stockQuantity}
-                onClick={() => setQuantity(quantity + 1)}
+                onClick={() => {
+                  setQuantity(quantity + 1);
+                  setAdded(false);
+                }}
               >
                 +
               </button>
             </div>
-            {/* Connect the team's shared cart hook with product and quantity when available. */}
-            <button className="product-button" type="button" disabled title={inStock ? "Cart coming soon" : "Out of stock"}>
-              {inStock ? "Add to Cart" : "Out of Stock"}
+            <button
+              className="product-button"
+              type="button"
+              disabled={!inStock}
+              onClick={handleAddToCart}
+              title={inStock ? "Add the selected quantity to your cart" : "Out of stock"}
+            >
+              {inStock ? (added ? "Added to Cart" : "Add to Cart") : "Out of Stock"}
             </button>
           </div>
-          <p className="products-cart-note">Cart coming soon.</p>
+          <p className="products-cart-note" role="status" aria-live="polite">
+            {added
+              ? `${quantity} ${quantity === 1 ? "item" : "items"} added to your cart.`
+              : "Choose a quantity, then add it to your cart."}
+          </p>
 
           <details className="product-description" open>
             <summary>Description</summary>

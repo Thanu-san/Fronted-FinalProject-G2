@@ -81,7 +81,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
                 <Link href={`/products?${viewParams}&view=list`} aria-current={view === "list" ? "true" : undefined}>List</Link>
               </div>
             </div>
-            <p className="products-cart-note">Cart coming soon. Explore product details in the meantime.</p>
+            <p className="products-cart-note">Add available products directly to your cart.</p>
             <ProductList products={products} view={view} />
             {data.totalPages > 1 && (
               <nav className="products-pagination" aria-label="Product pages">

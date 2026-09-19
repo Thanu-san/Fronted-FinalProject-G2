@@ -3,16 +3,30 @@
 import { useState } from "react";
 import Link from "next/link";
 import type { Product } from "@/types/product";
+import { useCart } from "@/context/CartContext";
 
 interface ProductCardProps {
   product: Product;
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
+  const { addItem } = useCart();
   const [imageFailed, setImageFailed] = useState(false);
+  const [added, setAdded] = useState(false);
   const imageUrl = product.thumbnail && /^https?:\/\//i.test(product.thumbnail) ? product.thumbnail : null;
   const inStock = product.availability && product.stockQuantity > 0;
   const price = product.priceOut.toLocaleString("en-US", { style: "currency", currency: "USD" });
+
+  const handleAddToCart = () => {
+    addItem({
+      id: product.uuid,
+      name: product.name,
+      price: product.priceOut,
+      image: product.thumbnail ?? undefined,
+      category: product.category?.name,
+    });
+    setAdded(true);
+  };
 
   return (
     <article className="product-card">
@@ -38,15 +52,19 @@ export default function ProductCard({ product }: ProductCardProps) {
         <p className={`product-stock ${inStock ? "" : "product-stock-out"}`}>
           {inStock ? `In Stock (${product.stockQuantity})` : "Out of Stock"}
         </p>
-        {/* The Cart teammate can connect the shared cart hook here when it is ready. */}
-        <button className="product-button" type="button" disabled title={inStock ? "Cart coming soon" : "Out of stock"}>
+        <button
+          className="product-button"
+          type="button"
+          disabled={!inStock}
+          onClick={handleAddToCart}
+          title={inStock ? "Add this product to your cart" : "Out of stock"}
+        >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true">
             <path d="M3 3h2l3 13h11l2-10H6M9 20h.01M18 20h.01" strokeLinecap="round" />
           </svg>
-          {inStock ? "Add to Cart" : "Out of Stock"}
+          {inStock ? (added ? "Added to Cart" : "Add to Cart") : "Out of Stock"}
         </button>
       </div>
     </article>
   );
 }
-

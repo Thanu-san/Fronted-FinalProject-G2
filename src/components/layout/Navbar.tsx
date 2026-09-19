@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import nextShopLogo from "@/assets/NextShop.png";
+import { useCart } from "@/context/CartContext";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -16,6 +17,7 @@ const NAV_LINKS = [
 export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
+  const { itemCount } = useCart();
   const [searchQuery, setSearchQuery] = useState("");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -115,7 +117,7 @@ export default function Navbar() {
           {/* Cart Icon */}
           <Link
             href="/cart"
-            aria-label="Shopping Cart"
+            aria-label={`Shopping Cart, ${itemCount} ${itemCount === 1 ? "item" : "items"}`}
             className="relative p-2.5 rounded-full text-zinc-300 hover:text-white hover:bg-white/10 transition-colors"
           >
             <svg
@@ -136,7 +138,7 @@ export default function Navbar() {
               <circle cx="8" cy="20" r="2" />
             </svg>
             <span className="absolute -top-0.5 -right-0.5 flex h-4.5 min-w-[18px] items-center justify-center rounded-full bg-primary px-1 text-[11px] font-bold text-white shadow-sm">
-              0
+              {itemCount > 99 ? "99+" : itemCount}
             </span>
           </Link>
 

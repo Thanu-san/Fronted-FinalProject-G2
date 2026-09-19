@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import type { Product } from "@/types/product";
+import { useCart } from "@/context/CartContext";
 
 interface FeaturedProductsProps {
   products?: Product[];
@@ -163,7 +164,20 @@ const FALLBACK_BEST_SELLERS: Product[] = [
 export default function FeaturedProducts({
   products = [],
 }: FeaturedProductsProps) {
+  const { addItem } = useCart();
   const [failedImages, setFailedImages] = useState<Record<string, boolean>>({});
+  const [addedProducts, setAddedProducts] = useState<Record<string, boolean>>({});
+
+  const handleAddToCart = (product: Product) => {
+    addItem({
+      id: product.uuid,
+      name: product.name,
+      price: product.priceOut,
+      image: product.thumbnail ?? undefined,
+      category: product.category?.name,
+    });
+    setAddedProducts((current) => ({ ...current, [product.uuid]: true }));
+  };
 
   // Use API products with valid thumbnails, or fall back to the curated 8 best sellers
   const validApiProducts = products
@@ -266,6 +280,8 @@ export default function FeaturedProducts({
             }
 
             const isFailed = failedImages[product.uuid];
+            const isInStock = product.availability && product.stockQuantity > 0;
+            const isAdded = addedProducts[product.uuid];
 
             return (
               <article
@@ -351,10 +367,20 @@ export default function FeaturedProducts({
                     </div>
 
                     {/* Cart Button */}
-                    <Link
-                      href={`/products/${product.uuid}`}
-                      aria-label={`View ${product.name}`}
-                      className="flex h-9 w-9 items-center justify-center rounded-xl border border-zinc-200/80 bg-white text-zinc-600 transition-colors duration-200 hover:border-primary hover:bg-primary hover:text-white active:scale-95 shadow-xs"
+                    <button
+                      type="button"
+                      onClick={() => handleAddToCart(product)}
+                      disabled={!isInStock}
+                      aria-label={
+                        isInStock
+                          ? `${isAdded ? "Add another" : "Add"} ${product.name} to cart`
+                          : `${product.name} is out of stock`
+                      }
+                      className={`flex h-9 w-9 items-center justify-center rounded-xl border shadow-xs transition-colors duration-200 active:scale-95 disabled:cursor-not-allowed disabled:opacity-40 ${
+                        isAdded
+                          ? "border-emerald-600 bg-emerald-600 text-white"
+                          : "border-zinc-200/80 bg-white text-zinc-600 hover:border-primary hover:bg-primary hover:text-white"
+                      }`}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -372,7 +398,7 @@ export default function FeaturedProducts({
                         <circle cx="19" cy="21" r="1" />
                         <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
                       </svg>
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </article>
