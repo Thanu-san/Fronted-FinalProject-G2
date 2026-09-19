@@ -1,8 +1,8 @@
 import Hero from "@/components/home/Hero";
 import Categories from "@/components/home/Categories";
-import FeaturedProducts from "@/components/home/FeaturedProducts";
 import PromoBanner from "@/components/home/PromoBanner";
-import Newsletter from "@/components/home/Newsletter";
+import FeaturedProducts from "@/components/home/FeaturedProducts";
+import Benefits from "@/components/home/Benefits";
 import { getProducts } from "@/services/product";
 import type { Product } from "@/types/product";
 
@@ -19,9 +19,9 @@ export default async function HomePage() {
     <main>
       <Hero products={products} />
       <Categories products={products} />
-      <FeaturedProducts />
       <PromoBanner products={products} />
-      <Newsletter />
+      <FeaturedProducts products={products} />
+      <Benefits/>
     </main>
   );
 }
