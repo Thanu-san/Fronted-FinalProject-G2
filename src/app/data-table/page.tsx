@@ -3,15 +3,30 @@ import DataTable from "@/components/data-table/DataTable";
 
 export default function DataTablePage() {
   return (
-    <main className="flex-1 max-w-6xl mx-auto px-4 sm:px-6 py-10 w-full space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight">Data Table</h1>
-        <p className="text-zinc-500 text-sm mt-1">
-          Search, Sort, Filter, and Pagination
-        </p>
-      </div>
+    <main className="products-feature">
+      <section className="products-hero">
+        <div className="products-container">
+          <p className="products-eyebrow">INVENTORY</p>
+          <h1>Product Data Table</h1>
+          <p>Search, review, and manage the latest catalog from the same storefront system used across the shop.</p>
+          <div className="products-hero-art" aria-hidden="true">
+            <div className="products-laptop"><span /></div>
+          </div>
+        </div>
+      </section>
 
-      <DataTable />
+      <section className="products-container products-catalog" aria-label="Product inventory table">
+        <div className="products-toolbar">
+          <p>Live product inventory</p>
+        </div>
+
+        <div className="products-catalog-main">
+          <div className="products-results">
+            <p role="status">Product catalog overview</p>
+          </div>
+          <DataTable />
+        </div>
+      </section>
     </main>
   );
 }
