@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React from "react";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -156,5 +155,4 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
 });
 
 export { Button };
->>>>>>> 31346f9b14d77b8430fa216ec7f40055fa6f7db2
 export default Button;
