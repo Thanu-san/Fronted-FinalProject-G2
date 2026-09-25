@@ -103,14 +103,3 @@ button {
   --color-pop-green: #19c37d;
   --color-pop-red: #ef4444;
 }
-
-@keyframes breathe {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.65;
-  }
-  50% {
-    transform: scale(1.06);
-    opacity: 1;
-  }
-}
