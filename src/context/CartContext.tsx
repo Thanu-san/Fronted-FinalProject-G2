@@ -17,6 +17,7 @@ export type CartProduct = {
   price: number;
   image?: string;
   category?: string;
+  stockQuantity?: number;
 };
 
 export type CartItem = CartProduct & {
@@ -76,26 +77,29 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const addItem = useCallback((product: CartProduct, quantity = 1) => {
     const safeQuantity = Math.max(1, Math.floor(quantity));
+    if (!Number.isFinite(safeQuantity)) return;
 
     setItems((currentItems) => {
       const existingItem = currentItems.find((item) => item.id === product.id);
+      const limit = Math.max(0, product.stockQuantity ?? existingItem?.stockQuantity ?? Infinity);
+      if (limit === 0) return currentItems.filter(item => item.id !== product.id);
 
       if (existingItem) {
         return currentItems.map((item) =>
           item.id === product.id
-            ? { ...item, quantity: item.quantity + safeQuantity }
+            ? { ...item, ...product, stockQuantity: product.stockQuantity ?? item.stockQuantity, quantity: Math.min(limit, item.quantity + safeQuantity) }
             : item,
         );
       }
 
-      return [...currentItems, { ...product, quantity: safeQuantity }];
+      return [...currentItems, { ...product, quantity: Math.min(limit, safeQuantity) }];
     });
   }, []);
 
   const increaseQuantity = useCallback((productId: string) => {
     setItems((currentItems) =>
       currentItems.map((item) =>
-        item.id === productId ? { ...item, quantity: item.quantity + 1 } : item,
+        item.id === productId ? { ...item, quantity: Math.min(item.stockQuantity ?? Infinity, item.quantity + 1) } : item,
       ),
     );
   }, []);

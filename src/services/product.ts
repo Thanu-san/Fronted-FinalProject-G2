@@ -9,9 +9,9 @@ async function request(path: string): Promise<Response> {
   });
 }
 
-export async function getProducts(page = 0): Promise<ProductResponse> {
+export async function getProducts(page = 0, size = 12): Promise<ProductResponse> {
   const response = await request(
-    `/products?page=${Math.max(0, Math.floor(page))}&size=12`,
+    `/products?page=${Math.max(0, Math.floor(page))}&size=${size}`,
   );
   if (!response.ok)
     throw new Error(`Failed to fetch products (${response.status}).`);
@@ -33,4 +33,15 @@ export async function getProductByUuid(uuid: string): Promise<Product | null> {
     throw new Error("The product API returned an invalid product response.");
   }
   return data;
+}
+
+// The API ignores search parameters, so load its paginated catalog before filtering.
+export async function getAllProducts(): Promise<Product[]> {
+  const first = await getProducts(0, 250);
+  const products = [...first.content];
+  for (let page = 1; page < first.totalPages; page++) {
+    const next = await getProducts(page, 250);
+    products.push(...next.content);
+  }
+  return [...new Map(products.map(product => [product.uuid, product])).values()];
 }

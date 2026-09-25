@@ -1,3 +1,8 @@
+"use client";
+
+import ProductForm from "./ProductForm";
+import { useState } from "react";
+import { Search, X, ArrowRight } from "lucide-react";
 import type { ProductFilterValues } from "@/types/product";
 
 interface ProductSearchProps {
@@ -6,23 +11,27 @@ interface ProductSearchProps {
   view: string;
 }
 
-export default function ProductSearch({ filters, page, view }: ProductSearchProps) {
+export default function ProductSearch({ filters, view }: ProductSearchProps) {
+  const [search, setSearch] = useState(filters.search);
   return (
-    <form action="/products" className="products-toolbar" role="search">
-      <input type="hidden" name="page" value={page} />
+    <ProductForm className="products-toolbar" role="search">
+      <input type="hidden" name="page" value={1} />
       <input type="hidden" name="view" value={view} />
       <input type="hidden" name="category" value={filters.category} />
       <input type="hidden" name="availability" value={filters.availability} />
       <input type="hidden" name="maxPrice" value={filters.maxPrice} />
       <input type="hidden" name="sort" value={filters.sort} />
       <label className="product-search">
-        <span className="products-sr-only">Search products on this page</span>
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true">
-          <circle cx="10.5" cy="10.5" r="6.5" /><path d="m16 16 5 5" />
-        </svg>
-        <input type="search" name="search" placeholder="Search products..." defaultValue={filters.search} />
+        <span className="products-sr-only">Search all products or categories</span>
+        <Search size={20} aria-hidden="true" />
+        <input type="search" name="search" placeholder="Search products or categories..." value={search} onChange={event => setSearch(event.target.value)} />
       </label>
-      <button className="product-button" type="submit">Search</button>
-    </form>
+      {search && <button className="products-search-clear" type="submit" aria-label="Clear search" onClick={event => {
+        const input = event.currentTarget.form?.elements.namedItem("search") as HTMLInputElement | null;
+        if (input) input.value = "";
+        setSearch("");
+      }}><X size={18} /></button>}
+      <button className="product-button" type="submit">Search <ArrowRight size={18} aria-hidden="true" /></button>
+    </ProductForm>
   );
 }
