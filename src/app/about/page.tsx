@@ -4,30 +4,15 @@ import Badge from "@/components/ui/Badge";
 import { buttonStyles } from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
+import TeamSection from "@/components/about/TeamSection";
 
 const STORE_NAME = "NextShop";
 
 export const metadata: Metadata = {
-  title: "About us",
-  description: `Learn more about ${STORE_NAME} and how we respect your time and your money.`,
+  title: "About Us | NextShop",
+  description: `Learn more about ${STORE_NAME}, our mission, our mentors, and the ISTAD engineering team behind our platform.`,
 };
 
-// TODO: Replace placeholder team members with the real group members.
-const TEAM_MEMBERS = [
-  { name: "Alex Morgan", role: "Team Lead / Frontend Architect" },
-  { name: "Jordan Lee", role: "UI / UX Designer" },
-  { name: "Casey Rivera", role: "Developer" },
-  { name: "Morgan Taylor", role: "QA Engineer" },
-] as const;
-
-const AVATAR_STYLES = [
-  "bg-primary-500 text-white",
-  "bg-periwinkle text-ink",
-  "bg-pop-green text-ink",
-  "bg-lavender text-primary-700",
-] as const;
-
-// TODO: Replace the placeholder descriptions below with the final copy.
 const VALUES = [
   {
     title: "Fair prices, shown upfront",
@@ -48,15 +33,6 @@ const VALUES = [
     accent: "border-periwinkle",
   },
 ] as const;
-
-function getInitials(name: string): string {
-  const words = name.trim().split(/\s+/);
-  const initials = words
-    .slice(0, 2)
-    .map((word) => word.charAt(0))
-    .join("");
-  return initials.toUpperCase() || "?";
-}
 
 export default function AboutPage() {
   return (
@@ -81,9 +57,8 @@ export default function AboutPage() {
             >
               Online shopping that respects your time and your money.
             </h1>
-            {/* TODO: Replace with the final hero copy. */}
             <p className="mt-5 max-w-xl text-base leading-relaxed text-ink-muted sm:text-lg">
-              {STORE_NAME} brings together a short list of products we genuinely stand
+              {STORE_NAME} brings together high quality products we genuinely stand
               behind, priced fairly and supported by helpful humans, so you can buy
               with confidence and get back to your day.
             </p>
@@ -95,10 +70,10 @@ export default function AboutPage() {
                 Browse products
               </Link>
               <Link
-                href="/contact"
+                href="/cart"
                 className={buttonStyles({ variant: "outline", size: "lg" })}
               >
-                Contact us
+                View cart
               </Link>
             </div>
           </div>
@@ -113,7 +88,6 @@ export default function AboutPage() {
           <SectionHeading
             id="values-heading"
             title="What you can expect from us"
-            // TODO: Replace with the final section copy.
             description={`Three simple promises guide every decision we make at ${STORE_NAME}.`}
           />
           <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -132,34 +106,8 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      {/* Team */}
-      <section aria-labelledby="team-heading" className="bg-canvas py-16 md:py-24">
-        <Container>
-          <SectionHeading
-            id="team-heading"
-            title="Meet the team"
-            // TODO: Replace with the final team intro copy.
-            description="The people behind the products, listed in one place."
-          />
-          <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {TEAM_MEMBERS.map((member, index) => (
-              <li
-                key={member.name}
-                className="rounded-2xl border border-lavender bg-white p-6 text-center shadow-sm"
-              >
-                <div
-                  aria-hidden="true"
-                  className={`mx-auto flex h-16 w-16 items-center justify-center rounded-full text-sm font-bold ${AVATAR_STYLES[index % AVATAR_STYLES.length]}`}
-                >
-                  {getInitials(member.name)}
-                </div>
-                <p className="mt-3 text-sm font-semibold text-ink">{member.name}</p>
-                <p className="mt-1 text-xs text-ink-muted">{member.role}</p>
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </section>
+      {/* Mentors & Team Section (Starts from teachers to students) */}
+      <TeamSection />
 
       {/* Closing call to action */}
       <section aria-labelledby="cta-heading" className="pt-10 pb-16 md:pt-14 md:pb-24">
@@ -178,7 +126,6 @@ export default function AboutPage() {
             >
               Ready to shop smarter?
             </h2>
-            {/* TODO: Replace with the final CTA copy. */}
             <p className="relative mx-auto mt-4 max-w-xl text-base leading-relaxed text-white/85">
               Browse the catalogue, pick what works for you, and check out in a few clicks.
             </p>
