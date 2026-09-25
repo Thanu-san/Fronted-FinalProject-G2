@@ -83,3 +83,23 @@ body {
 button {
   cursor: pointer;
 }
+/* ========================
+   Theme tokens — About & Reusable UI (assignment 6)
+   Appended only; existing tokens above are unchanged.
+   ======================== */
+@theme {
+  --color-primary-50: #f1eeff;
+  --color-primary-500: #5b3df5;
+  --color-primary-600: #4a2ee0;
+  --color-primary-700: #3b23b8;
+
+  --color-lavender: #dcdcfb;
+  --color-periwinkle: #a9adf7;
+
+  --color-canvas: #faf9ff;
+  --color-ink: #23232b;
+  --color-ink-muted: #5c5c6b;
+
+  --color-pop-green: #19c37d;
+  --color-pop-red: #ef4444;
+}

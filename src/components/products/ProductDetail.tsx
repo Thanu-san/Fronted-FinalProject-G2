@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import ProductCard from "./ProductCard";
 import type { ComputerSpec, Product } from "@/types/product";
+import { useCart } from "@/context/CartContext";
 
 interface ProductDetailProps {
   product: Product;
@@ -17,6 +18,7 @@ const specifications: [keyof ComputerSpec, string][] = [
 ];
 const tabs = ["Specifications", "Description", "Warranty"] as const;
 
+<<<<<<< HEAD
 // Some API records contain the literal placeholder "string".
 function displayText(value: string | null | undefined) {
   const text = value?.trim();
@@ -30,17 +32,42 @@ export default function ProductDetail({ product, relatedProducts = [] }: Product
     product.thumbnail, ...(product.images ?? []), ...(colors[selectedColor]?.images ?? []),
   ])].filter((image): image is string => typeof image === "string" && /^https?:\/\//i.test(image));
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+=======
+export default function ProductDetail({ product }: ProductDetailProps) {
+  const { addItem } = useCart();
+  const images = [...new Set([product.thumbnail, ...(product.images ?? [])])]
+    .filter((image): image is string => typeof image === "string" && /^https?:\/\//i.test(image));
+  const [selectedImage, setSelectedImage] = useState(images[0] ?? null);
+>>>>>>> bb88e190c6ff9b67fafbbdc86b8c5f6fbf6acd5a
   const [failedImages, setFailedImages] = useState<string[]>([]);
   const availableImages = images.filter(image => !failedImages.includes(image));
   const activeImage = selectedImage && availableImages.includes(selectedImage) ? selectedImage : availableImages[0];
   const [quantity, setQuantity] = useState(1);
+<<<<<<< HEAD
   const [activeTab, setActiveTab] = useState<(typeof tabs)[number]>("Specifications");
+=======
+  const [added, setAdded] = useState(false);
+>>>>>>> bb88e190c6ff9b67fafbbdc86b8c5f6fbf6acd5a
   const inStock = product.availability && product.stockQuantity > 0;
   const brand = displayText(product.brand?.name);
   const category = displayText(product.category?.name);
   const warranty = displayText(product.warranty);
   const description = displayText(product.description);
   const price = product.priceOut.toLocaleString("en-US", { style: "currency", currency: "USD" });
+
+  const handleAddToCart = () => {
+    addItem(
+      {
+        id: product.uuid,
+        name: product.name,
+        price: product.priceOut,
+        image: product.thumbnail ?? undefined,
+        category: product.category?.name,
+      },
+      quantity,
+    );
+    setAdded(true);
+  };
 
   return (
     <main className="products-container product-detail">
@@ -97,6 +124,7 @@ export default function ProductDetail({ product, relatedProducts = [] }: Product
             {warranty && <p className="product-warranty-badge">{warranty}</p>}
           </div>
 
+<<<<<<< HEAD
           <div className="product-detail-options">
             {colors.length > 0 && (
               <fieldset className="product-colors">
@@ -132,6 +160,58 @@ export default function ProductDetail({ product, relatedProducts = [] }: Product
             </button>
           </div>
           <p className="products-cart-note" id="product-cart-status">Cart coming soon.</p>
+=======
+          <div className="product-purchase">
+            <div className="product-quantity" role="group" aria-label="Quantity">
+              <button
+                type="button"
+                aria-label="Decrease quantity"
+                disabled={!inStock || quantity <= 1}
+                onClick={() => {
+                  setQuantity(quantity - 1);
+                  setAdded(false);
+                }}
+              >
+                -
+              </button>
+              <output aria-live="polite" aria-label="Selected quantity">{inStock ? quantity : 0}</output>
+              <button
+                type="button"
+                aria-label="Increase quantity"
+                disabled={!inStock || quantity >= product.stockQuantity}
+                onClick={() => {
+                  setQuantity(quantity + 1);
+                  setAdded(false);
+                }}
+              >
+                +
+              </button>
+            </div>
+            <button
+              className="product-button"
+              type="button"
+              disabled={!inStock}
+              onClick={handleAddToCart}
+              title={inStock ? "Add the selected quantity to your cart" : "Out of stock"}
+            >
+              {inStock ? (added ? "Added to Cart" : "Add to Cart") : "Out of Stock"}
+            </button>
+          </div>
+          <p className="products-cart-note" role="status" aria-live="polite">
+            {added
+              ? `${quantity} ${quantity === 1 ? "item" : "items"} added to your cart.`
+              : "Choose a quantity, then add it to your cart."}
+          </p>
+
+          <details className="product-description" open>
+            <summary>Description</summary>
+            <p>{product.description || "No description available."}</p>
+          </details>
+          <dl className="product-facts">
+            <div><dt>Category</dt><dd>{product.category?.name || "Not specified"}</dd></div>
+            <div><dt>Warranty</dt><dd>{product.warranty || "Not specified"}</dd></div>
+          </dl>
+>>>>>>> bb88e190c6ff9b67fafbbdc86b8c5f6fbf6acd5a
         </section>
       </div>
 
