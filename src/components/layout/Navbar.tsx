@@ -78,41 +78,43 @@ export default function Navbar() {
           })}
         </nav>
 
-        {/* Right Section: Bigger & Longer Search Bar + Cart & User Icons */}
+        {/* Right Section: Bigger & Longer Search Bar (Home only) + Cart & User Icons */}
         <div className="flex items-center gap-3 sm:gap-5">
-          {/* Bigger and Longer Search Bar */}
-          <form
-            onSubmit={handleSearchSubmit}
-            className="hidden sm:flex items-center relative w-64 md:w-72 lg:w-84 xl:w-96"
-          >
-            <div className="flex items-center w-full h-11 rounded-full bg-white/[0.08] px-4 border border-white/15 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/30 focus-within:bg-white/[0.12] transition-all shadow-xs">
-              <span className="text-zinc-400 mr-2.5 shrink-0">
-                {/* Search Icon */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-search"
-                >
-                  <path d="m21 21-4.34-4.34" />
-                  <circle cx="11" cy="11" r="8" />
-                </svg>
-              </span>
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search products..."
-                className="w-full bg-transparent text-sm text-white placeholder-zinc-400 focus:outline-none"
-              />
-            </div>
-          </form>
+          {/* Search Bar - only visible on Home page */}
+          {pathname === "/" && (
+            <form
+              onSubmit={handleSearchSubmit}
+              className="hidden sm:flex items-center relative w-64 md:w-72 lg:w-84 xl:w-96"
+            >
+              <div className="flex items-center w-full h-11 rounded-full bg-white/[0.08] px-4 border border-white/15 focus-within:border-primary focus-within:ring-2 focus-within:ring-primary/30 focus-within:bg-white/[0.12] transition-all shadow-xs">
+                <span className="text-zinc-400 mr-2.5 shrink-0">
+                  {/* Search Icon */}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-search"
+                  >
+                    <path d="m21 21-4.34-4.34" />
+                    <circle cx="11" cy="11" r="8" />
+                  </svg>
+                </span>
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search products..."
+                  className="w-full bg-transparent text-sm text-white placeholder-zinc-400 focus:outline-none"
+                />
+              </div>
+            </form>
+          )}
 
           {/* Cart Icon */}
           <Link
@@ -148,7 +150,9 @@ export default function Navbar() {
               onClick={() => setIsAccountMenuOpen(!isAccountMenuOpen)}
               aria-label="Account Menu"
               className={`p-2.5 rounded-full transition-colors ${
-                isAccountMenuOpen ? "bg-white/10 text-white" : "text-zinc-300 hover:text-white hover:bg-white/10"
+                isAccountMenuOpen
+                  ? "bg-white/10 text-white"
+                  : "text-zinc-300 hover:text-white hover:bg-white/10"
               }`}
             >
               <svg
@@ -171,22 +175,22 @@ export default function Navbar() {
             {isAccountMenuOpen && (
               <>
                 {/* Invisible overlay to close dropdown when clicking outside */}
-                <div 
-                  className="fixed inset-0 z-40" 
+                <div
+                  className="fixed inset-0 z-40"
                   onClick={() => setIsAccountMenuOpen(false)}
                 ></div>
-                
+
                 {/* Dropdown Menu */}
                 <div className="absolute right-0 mt-3 w-48 bg-white dark:bg-zinc-900 rounded-xl shadow-xl border border-zinc-200 dark:border-zinc-800 z-50 py-1 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
-                  <Link 
-                    href="/login" 
+                  <Link
+                    href="/login"
                     onClick={() => setIsAccountMenuOpen(false)}
                     className="block px-4 py-2.5 text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
                   >
                     Login
                   </Link>
-                  <Link 
-                    href="/register" 
+                  <Link
+                    href="/register"
                     onClick={() => setIsAccountMenuOpen(false)}
                     className="block px-4 py-2.5 text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
                   >
@@ -232,35 +236,37 @@ export default function Navbar() {
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
         <div className="md:hidden border-t border-indigo-950/60 bg-gradient-to-b from-[#07080e] via-[#0a0d1d] to-[#252063] px-4 py-4 space-y-3">
-          {/* Mobile Search Input */}
-          <form onSubmit={handleSearchSubmit} className="mb-3">
-            <div className="flex items-center w-full h-11 rounded-full bg-white/[0.08] px-4 border border-white/15">
-              <span className="text-zinc-400 mr-2.5 shrink-0">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-search"
-                >
-                  <path d="m21 21-4.34-4.34" />
-                  <circle cx="11" cy="11" r="8" />
-                </svg>
-              </span>
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search products..."
-                className="w-full bg-transparent text-sm text-white placeholder-zinc-400 focus:outline-none"
-              />
-            </div>
-          </form>
+          {/* Mobile Search Input - only visible on Home page */}
+          {pathname === "/" && (
+            <form onSubmit={handleSearchSubmit} className="mb-3">
+              <div className="flex items-center w-full h-11 rounded-full bg-white/[0.08] px-4 border border-white/15">
+                <span className="text-zinc-400 mr-2.5 shrink-0">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-search"
+                  >
+                    <path d="m21 21-4.34-4.34" />
+                    <circle cx="11" cy="11" r="8" />
+                  </svg>
+                </span>
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search products..."
+                  className="w-full bg-transparent text-sm text-white placeholder-zinc-400 focus:outline-none"
+                />
+              </div>
+            </form>
+          )}
 
           {NAV_LINKS.map((link) => {
             const isActive =
