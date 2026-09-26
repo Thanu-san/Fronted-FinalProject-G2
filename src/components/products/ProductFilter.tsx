@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import Form from "next/form";
+import ProductForm from "./ProductForm";
+import ProductSort from "./ProductSort";
 import { useEffect, useRef, type SyntheticEvent } from "react";
 import type { Category, Product, ProductFilterValues } from "@/types/product";
 
@@ -13,7 +14,7 @@ interface ProductFilterProps {
   view: string;
 }
 
-export default function ProductFilter({ products, filters, priceLimit, page, view }: ProductFilterProps) {
+export default function ProductFilter({ products, filters, priceLimit, view }: ProductFilterProps) {
   const priceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -47,8 +48,8 @@ export default function ProductFilter({ products, filters, priceLimit, page, vie
   return (
     <details className="product-filters" open>
       <summary>Filters</summary>
-      <Form action="/products" replace scroll={false} className="product-filter-fields" onChange={updateFilters}>
-        <input type="hidden" name="page" value={page} />
+      <ProductForm className="product-filter-fields" onChange={updateFilters}>
+        <input type="hidden" name="page" value={1} />
         <input type="hidden" name="view" value={view} />
         <input type="hidden" name="search" value={filters.search} />
         <fieldset className="product-filter-options">
@@ -71,16 +72,9 @@ export default function ProductFilter({ products, filters, priceLimit, page, vie
           Maximum price ($)
           <input type="number" name="maxPrice" min="0" max={priceLimit} step="0.01" defaultValue={filters.maxPrice} required />
         </label>
-        <label>
-          Sort by
-          <select name="sort" defaultValue={filters.sort}>
-            <option value="default">Default order</option>
-            <option value="low">Price: Low to High</option>
-            <option value="high">Price: High to Low</option>
-          </select>
-        </label>
-        <Link className="product-reset" scroll={false} href={`/products?page=${page}&view=${view}`}>Clear filters</Link>
-      </Form>
+        <ProductSort value={filters.sort} />
+        <Link className="product-reset" scroll={false} href={`/products?view=${view}`}>Clear filters</Link>
+      </ProductForm>
     </details>
   );
 }
