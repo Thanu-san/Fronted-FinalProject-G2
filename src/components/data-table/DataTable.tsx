@@ -15,9 +15,11 @@ export default function DataTable() {
 
     async function loadProducts() {
       try {
-        const firstPage = await getProducts(0);
-        const pageNumbers = Array.from({ length: firstPage.totalPages }, (_, index) => index);
-        const pages = await Promise.all(pageNumbers.map((page) => getProducts(page)));
+        const pageSize = 12;
+        const firstPage = await getProducts(0, pageSize);
+        const maxPagesToLoad = Math.min(firstPage.totalPages, 25);
+        const pageNumbers = Array.from({ length: maxPagesToLoad }, (_, index) => index);
+        const pages = await Promise.all(pageNumbers.map((page) => getProducts(page, pageSize)));
 
         const rows: ProductTableRow[] = pages.flatMap((response) =>
           response.content.map((product) => {

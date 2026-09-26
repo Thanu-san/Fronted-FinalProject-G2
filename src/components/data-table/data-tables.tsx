@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useRouter } from "next/navigation";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import type { ColumnConfig, ProductTableRow } from "./columns";
@@ -14,10 +15,11 @@ export function DataTable<T extends Record<string, unknown>>({
   columns,
   data,
 }: DataTableProps<T>) {
+  const router = useRouter();
   const [search, setSearch] = React.useState("");
   const [currentPage, setCurrentPage] = React.useState(1);
   const [selectedRows, setSelectedRows] = React.useState<Record<string, boolean>>({});
-  const pageSize = 5;
+  const pageSize = 12;
 
   const filteredData = React.useMemo(() => {
     const term = search.trim().toLowerCase();
@@ -48,6 +50,13 @@ export function DataTable<T extends Record<string, unknown>>({
       [rowId]: !prev[rowId],
     }));
   }, []);
+
+  const handleRowClick = React.useCallback((row: T) => {
+    const rowUuid = (row as Record<string, unknown>).uuid;
+    if (typeof rowUuid === "string" && rowUuid.trim()) {
+      router.push(`/products/${rowUuid}`);
+    }
+  }, [router]);
 
   const toggleAllVisibleRows = React.useCallback(() => {
     const visibleIds = pageData.map((row, index) => getRowId(row, index));
@@ -81,11 +90,11 @@ export function DataTable<T extends Record<string, unknown>>({
     <div className="space-y-5">
       <div className="flex items-center justify-between gap-3 rounded-2xl border border-gray-200 bg-gray-100 p-3">
         <div className="flex items-center gap-2 text-sm font-medium text-slate-700">
-          <span className="inline-block h-2.5 w-2.5 rounded-full bg-slate-500" />
-          Product overview
+          <span className="inline-block h-2.5 w-2.5 rounded-full bg-green-600" />
+          Product Overview
         </div>
         <Input
-          placeholder="Filter products..."
+          placeholder="Search products..."
           value={search}
           onChange={(event) => setSearch(event.target.value)}
           className="max-w-sm border-gray-300 bg-white placeholder:text-slate-50 focus:border-gray-400 focus:ring-2 focus:ring-gray-200"
@@ -118,8 +127,21 @@ export function DataTable<T extends Record<string, unknown>>({
           <tbody className="divide-y divide-indigo-100 bg-white">
             {pageData.length > 0 ? (
               pageData.map((row, rowIndex) => (
-                <tr key={String((row as unknown as ProductTableRow).uuid ?? rowIndex)} className="transition-colors hover:bg-indigo-50/70">
-                  <td className="w-12 px-3 py-3 text-center">
+                <tr
+                  key={String((row as unknown as ProductTableRow).uuid ?? rowIndex)}
+                  className="cursor-pointer transition-colors hover:bg-indigo-50/70"
+                  onClick={() => handleRowClick(row)}
+                  onKeyDown={(event) => {
+                    if ((event.key === "Enter" || event.key === " ") && (row as Record<string, unknown>).uuid) {
+                      event.preventDefault();
+                      handleRowClick(row);
+                    }
+                  }}
+                  tabIndex={0}
+                  role="button"
+                  aria-label={`Open product ${String((row as Record<string, unknown>).name ?? "details")}`}
+                >
+                  <td className="w-12 px-3 py-3 text-center" onClick={(event) => event.stopPropagation()}>
                     <input
                       type="checkbox"
                       checked={!!selectedRows[getRowId(row, rowIndex)]}
