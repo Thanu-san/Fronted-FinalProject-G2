@@ -10,20 +10,23 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
-  const { addItem } = useCart();
+  const { addItem, items, isReady } = useCart();
   const [imageFailed, setImageFailed] = useState(false);
   const [added, setAdded] = useState(false);
   const imageUrl = product.thumbnail && /^https?:\/\//i.test(product.thumbnail) ? product.thumbnail : null;
   const inStock = product.availability && product.stockQuantity > 0;
+  const remaining = Math.max(0, product.stockQuantity - (items.find(item => item.id === product.uuid)?.quantity ?? 0));
   const price = product.priceOut.toLocaleString("en-US", { style: "currency", currency: "USD" });
 
   const handleAddToCart = () => {
+    if (!isReady || !inStock || remaining === 0) return;
     addItem({
       id: product.uuid,
       name: product.name,
       price: product.priceOut,
       image: product.thumbnail ?? undefined,
       category: product.category?.name,
+      stockQuantity: product.availability ? product.stockQuantity : 0,
     });
     setAdded(true);
   };
@@ -55,14 +58,14 @@ export default function ProductCard({ product }: ProductCardProps) {
         <button
           className="product-button"
           type="button"
-          disabled={!inStock}
+          disabled={!isReady || !inStock || remaining === 0}
           onClick={handleAddToCart}
           title={inStock ? "Add this product to your cart" : "Out of stock"}
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true">
             <path d="M3 3h2l3 13h11l2-10H6M9 20h.01M18 20h.01" strokeLinecap="round" />
           </svg>
-          {inStock ? (added ? "Added to Cart" : "Add to Cart") : "Out of Stock"}
+          {inStock ? (remaining === 0 ? "Stock limit reached" : added ? "Added to Cart" : "Add to Cart") : "Out of Stock"}
         </button>
       </div>
     </article>
