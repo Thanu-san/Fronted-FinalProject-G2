@@ -1,9 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Code, GraduationCap, Send } from "lucide-react";
 import Badge from "@/components/ui/Badge";
 import { buttonStyles } from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
+import TeamGrid, { type TeamMember } from "@/components/ui/TeamGrid";
+import cheakchingLyheng from "@/assets/team/cheakching-lyheng.jpg";
+import khoeurtSokleap from "@/assets/team/khoeurt-sokleap.jpg";
+import limKunpheaktra from "@/assets/team/lim-kunpheaktra.jpg";
+import menSenghak from "@/assets/team/men-senghak.jpg";
+import sanSengthanu from "@/assets/team/san-sengthanu.jpg";
+import seoungReaksa from "@/assets/team/seoung-reaksa.jpg";
+import srorngSokcheat from "@/assets/team/srorng-sokcheat.jpg";
 
 const STORE_NAME = "NextShop";
 
@@ -12,20 +21,70 @@ export const metadata: Metadata = {
   description: `Learn more about ${STORE_NAME} and how we respect your time and your money.`,
 };
 
-// TODO: Replace placeholder team members with the real group members.
-const TEAM_MEMBERS = [
-  { name: "Alex Morgan", role: "Team Lead / Frontend Architect" },
-  { name: "Jordan Lee", role: "UI / UX Designer" },
-  { name: "Casey Rivera", role: "Developer" },
-  { name: "Morgan Taylor", role: "QA Engineer" },
-] as const;
+const MENTOR = {
+  name: "Srorng Sokcheat",
+  title: "IT Instructor",
+  photo: srorngSokcheat.src,
+  github: "https://github.com/CheatDev07",
+  telegram: "https://t.me/Sokcheat_srorng",
+} as const;
 
-const AVATAR_STYLES = [
-  "bg-primary-500 text-white",
-  "bg-periwinkle text-ink",
-  "bg-pop-green text-ink",
-  "bg-lavender text-primary-700",
-] as const;
+// The 6th member is Seoung Reaksa (identity confirmed via photo); role still TODO.
+const TEAM_MEMBERS: TeamMember[] = [
+  {
+    name: "San Sengthanu",
+    title: "Team Leader",
+    role: "leader",
+    photo: sanSengthanu.src,
+    github: "https://github.com/Thanu-san",
+    // Telegram swapped for a mailto link on this card.
+    email: "thanusanseng@gmail.com",
+  },
+  {
+    name: "Men Senghak",
+    title: "Vice Team Lead",
+    role: "sub-leader",
+    photo: menSenghak.src,
+    github: "https://github.com/hak22-legit",
+    email: "haks5685@gmail.com",
+  },
+  {
+    name: "Cheakching Lyheng",
+    title: "Junior Developer",
+    role: "member",
+    photo: cheakchingLyheng.src,
+    github: "https://github.com/lyheng142",
+    email: "lyhengchheakching@gmail.com",
+  },
+  {
+    name: "Khoeurt Sokleap",
+    title: "Junior Developer",
+    role: "member",
+    photo: khoeurtSokleap.src,
+    github: "https://github.com/Sokleap123",
+    email: "johnleap9641@gmail.com",
+  },
+  {
+    name: "Lim Kunpheaktra",
+    title: "Junior Developer",
+    role: "member",
+    photo: limKunpheaktra.src,
+    github: "https://github.com/Kunpheaktralim",
+    email: "Kunpheaktralim@gmail.com",
+  },
+  {
+    name: "Seoung Reaksa",
+    title: "Junior Developer",
+    role: "member",
+    photo: seoungReaksa.src,
+    github: "https://github.com/seungreaksa",
+    email: "seungreaksa0@gmail.com",
+  },
+];
+
+/* Shared style for the circular social icon buttons. */
+const SOCIAL_ICON_STYLES =
+  "inline-flex h-10 w-10 items-center justify-center rounded-full border border-primary-500/30 text-primary-700 transition-colors hover:bg-primary-50 hover:border-primary-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600";
 
 // TODO: Replace the placeholder descriptions below with the final copy.
 const VALUES = [
@@ -132,32 +191,70 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      {/* Team */}
+      {/* Our mentor */}
+      <section aria-labelledby="mentor-heading" className="bg-white py-16 md:py-24">
+        <Container className="text-center">
+          <Badge tone="soft">
+            <GraduationCap aria-hidden="true" className="h-4 w-4" />
+            Guidance &amp; Advisory
+          </Badge>
+          <SectionHeading
+            id="mentor-heading"
+            align="center"
+            title="Our Mentor"
+            description="The instructor guiding Group 2 through this final project."
+          />
+          <article className="mx-auto mt-10 w-full max-w-sm rounded-2xl border border-periwinkle bg-canvas p-8 text-center shadow-md shadow-primary-500/10">
+            {MENTOR.photo ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={MENTOR.photo}
+                alt={`Portrait of ${MENTOR.name}`}
+                className="mx-auto h-24 w-24 rounded-full object-cover ring-2 ring-primary-500 shadow-md shadow-primary-500/20"
+              />
+            ) : (
+              <div
+                aria-hidden="true"
+                className="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-primary-50 text-2xl font-bold text-primary-700 ring-2 ring-primary-500 shadow-md shadow-primary-500/20"
+              >
+                {getInitials(MENTOR.name)}
+              </div>
+            )}
+            <h3 className="mt-4 text-xl font-bold text-ink">{MENTOR.name}</h3>
+            <p className="mt-1 text-sm leading-relaxed text-ink-muted">{MENTOR.title}</p>
+            <Badge tone="primary" className="mt-5">
+              <GraduationCap aria-hidden="true" className="h-3.5 w-3.5" />
+              Mentor
+            </Badge>
+            <div className="mt-5 flex items-center justify-center gap-3">
+              <a
+                href={MENTOR.github}
+                className={SOCIAL_ICON_STYLES}
+                aria-label={`${MENTOR.name}'s GitHub`}
+              >
+                <Code aria-hidden="true" className="h-4 w-4" />
+              </a>
+              <a
+                href={MENTOR.telegram}
+                className={SOCIAL_ICON_STYLES}
+                aria-label={`${MENTOR.name}'s Telegram`}
+              >
+                <Send aria-hidden="true" className="h-4 w-4" />
+              </a>
+            </div>
+          </article>
+        </Container>
+      </section>
+
+      {/* Our team */}
       <section aria-labelledby="team-heading" className="bg-canvas py-16 md:py-24">
         <Container>
           <SectionHeading
             id="team-heading"
-            title="Meet the team"
-            // TODO: Replace with the final team intro copy.
-            description="The people behind the products, listed in one place."
+            title="Our Team"
+            description="The six members of Group 2 building this project together."
           />
-          <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {TEAM_MEMBERS.map((member, index) => (
-              <li
-                key={member.name}
-                className="rounded-2xl border border-lavender bg-white p-6 text-center shadow-sm"
-              >
-                <div
-                  aria-hidden="true"
-                  className={`mx-auto flex h-16 w-16 items-center justify-center rounded-full text-sm font-bold ${AVATAR_STYLES[index % AVATAR_STYLES.length]}`}
-                >
-                  {getInitials(member.name)}
-                </div>
-                <p className="mt-3 text-sm font-semibold text-ink">{member.name}</p>
-                <p className="mt-1 text-xs text-ink-muted">{member.role}</p>
-              </li>
-            ))}
-          </ul>
+          <TeamGrid members={TEAM_MEMBERS} />
         </Container>
       </section>
 
