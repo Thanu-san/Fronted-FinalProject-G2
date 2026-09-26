@@ -65,6 +65,7 @@ export default function CartItem({
             <button
               type="button"
               onClick={onIncrease}
+              disabled={item.stockQuantity !== undefined && item.quantity >= item.stockQuantity}
               aria-label={`Increase ${item.name} quantity`}
               className="size-9 rounded-r-lg text-lg text-indigo-600 transition-colors hover:bg-indigo-50"
             >
