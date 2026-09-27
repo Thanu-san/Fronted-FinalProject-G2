@@ -20,7 +20,7 @@ export function DataTable<T extends Record<string, unknown>>({
   const [currentPage, setCurrentPage] = React.useState(1);
   const [selectedRows, setSelectedRows] = React.useState<Record<string, boolean>>({});
   const pageSize = 12;
-
+   // Search
   const filteredData = React.useMemo(() => {
     const term = search.trim().toLowerCase();
     if (!term) return data;
