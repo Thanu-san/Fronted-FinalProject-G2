@@ -62,59 +62,75 @@ export default function LoginForm() {
     <>
       <form onSubmit={handleLogin} className="space-y-5">
         {error && (
-          <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm text-center">
+          <div className="p-3 rounded-lg bg-red-500/20 border border-red-400/50 text-white text-sm text-center backdrop-blur-sm">
             {error}
           </div>
         )}
 
-        <div>
-          <label className="block text-sm font-medium text-zinc-300 mb-1.5" htmlFor="email">
-            Email Address
-          </label>
+        {/* Email Input */}
+        <div className="relative">
           <input 
             id="email"
             type="email" 
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="you@example.com" 
-            className="w-full px-4 py-2.5 rounded-lg bg-zinc-950/50 border border-zinc-800 text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all shadow-sm"
+            placeholder="Email address" 
+            className="w-full bg-transparent border border-white/40 rounded-full px-6 py-3 text-white placeholder:text-white/70 focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all"
             required
           />
+          {/* User Icon on the right */}
+          <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-white/70">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+            </svg>
+          </div>
         </div>
 
-        <div>
-          <div className="flex items-center justify-between mb-1.5">
-            <label className="block text-sm font-medium text-zinc-300" htmlFor="password">
-              Password
-            </label>
-            <Link href="/forgot-password" className="text-xs font-medium text-indigo-400 hover:text-indigo-300 hover:underline transition-colors">
-              Forgot password?
-            </Link>
-          </div>
+        {/* Password Input */}
+        <div className="relative">
           <input 
             id="password"
             type="password" 
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="••••••••" 
-            className="w-full px-4 py-2.5 rounded-lg bg-zinc-950/50 border border-zinc-800 text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-500 transition-all shadow-sm"
+            placeholder="Password" 
+            className="w-full bg-transparent border border-white/40 rounded-full px-6 py-3 text-white placeholder:text-white/70 focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all"
             required
           />
+          {/* Lock Icon on the right */}
+          <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-white/70">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+            </svg>
+          </div>
         </div>
 
+        {/* Remember Me & Forgot Password Row */}
+        <div className="flex items-center justify-between px-2 pt-2">
+          <label className="flex items-center gap-2 cursor-pointer group">
+            <input type="checkbox" className="w-4 h-4 rounded-sm border-white/40 bg-transparent checked:bg-white text-purple-600 focus:ring-white/50 focus:ring-offset-0 cursor-pointer" />
+            <span className="text-sm text-white/90 group-hover:text-white transition-colors">Remember me</span>
+          </label>
+          
+          <Link href="/forgot-password" className="text-sm text-white/90 hover:text-white hover:underline transition-colors">
+            Forgot password?
+          </Link>
+        </div>
+
+        {/* Animated Submit Button */}
         <button 
           type="submit" 
           disabled={isLoading}
-          className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-2.5 rounded-lg transition-colors mt-2 shadow-md shadow-indigo-900/20 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full py-3 mt-4 font-bold text-purple-900 bg-white rounded-full transition-all duration-300 ease-out hover:bg-white/95 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:shadow-none"
         >
-          {isLoading ? "Signing in..." : "Sign In"}
+          {isLoading ? "Signing in..." : "Login"}
         </button>
       </form>
 
-      <p className="text-center text-sm text-zinc-400 mt-6">
+      <p className="text-center text-sm text-white/90 mt-8">
         Don't have an account?{" "}
-        <Link href="/register" className="font-medium text-indigo-400 hover:text-indigo-300 hover:underline transition-colors">
-          Create one
+        <Link href="/register" className="font-bold text-white hover:underline transition-all">
+          Register
         </Link>
       </p>
     </>

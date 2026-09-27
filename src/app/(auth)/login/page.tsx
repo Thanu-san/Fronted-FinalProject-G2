@@ -1,38 +1,63 @@
 import React from "react";
 import LoginForm from "@/components/auth/LoginForm";
+import bgImage from "@/assets/img.jpg"; 
 
 export default function LoginPage() {
+  const stars = [
+    { top: "5%", left: "10%", delay: "0s", size: "2px" },
+    { top: "15%", left: "25%", delay: "1.5s", size: "3px" },
+    { top: "8%", left: "45%", delay: "0.5s", size: "2px" },
+    { top: "25%", left: "15%", delay: "2s", size: "1px" },
+    { top: "12%", left: "65%", delay: "1.2s", size: "3px" },
+    { top: "20%", left: "80%", delay: "0.8s", size: "2px" },
+    { top: "6%", left: "85%", delay: "2.5s", size: "2px" },
+    { top: "35%", left: "5%", delay: "1.8s", size: "1px" },
+    { top: "30%", left: "35%", delay: "0.3s", size: "2px" },
+    { top: "18%", left: "55%", delay: "2.2s", size: "1px" },
+    { top: "28%", left: "75%", delay: "1.1s", size: "2px" },
+    { top: "32%", left: "90%", delay: "0.9s", size: "3px" },
+  ];
+
   return (
-    <main className="relative flex min-h-screen w-full flex-col items-center justify-center px-4 overflow-hidden bg-zinc-950">
-      
+    <main 
+      className="relative flex min-h-screen w-full items-center justify-center px-4 bg-cover bg-center bg-no-repeat overflow-hidden"
+      style={{ backgroundImage: `url(${bgImage.src})` }}
+    >
       <style dangerouslySetInnerHTML={{__html: `
-        @keyframes blob {
-          0% { transform: translate(0px, 0px) scale(1); }
-          33% { transform: translate(150px, -100px) scale(1.2); }
-          66% { transform: translate(-100px, 150px) scale(0.8); }
-          100% { transform: translate(0px, 0px) scale(1); }
+        @keyframes twinkle {
+          0%, 100% { opacity: 0.2; transform: scale(0.8); }
+          50% { opacity: 1; transform: scale(1.2); }
         }
-        .animate-blob { animation: blob 10s infinite alternate ease-in-out; }
-        .animation-delay-2000 { animation-delay: 2s; }
-        .animation-delay-4000 { animation-delay: 4s; }
+        .animate-twinkle {
+          animation: twinkle 3s infinite ease-in-out;
+        }
       `}} />
 
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-        <div className="absolute -top-40 -right-20 w-96 h-96 bg-indigo-500/30 rounded-full blur-3xl animate-blob"></div>
-        <div className="absolute top-40 -left-20 w-72 h-72 bg-purple-500/30 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
-        <div className="absolute -bottom-20 right-1/4 w-80 h-80 bg-blue-500/25 rounded-full blur-3xl animate-blob animation-delay-4000"></div>
+        {stars.map((star, i) => (
+          <div 
+            key={i}
+            className="absolute bg-white rounded-full animate-twinkle"
+            style={{
+              top: star.top,
+              left: star.left,
+              width: star.size,
+              height: star.size,
+              animationDelay: star.delay,
+              boxShadow: "0 0 6px rgba(255, 255, 255, 0.8)"
+            }}
+          />
+        ))}
       </div>
 
-      <div className="relative z-10 w-full max-w-md p-8 bg-zinc-900/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-zinc-800">
+      <div className="absolute inset-0 bg-purple-950/20 pointer-events-none z-0"></div>
+
+      <div className="relative z-10 w-full max-w-[420px] p-10 bg-white/10 backdrop-blur-md rounded-2xl shadow-2xl border border-white/20">
         
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold tracking-tight mb-2 text-white">
-            Welcome Back
+          <h1 className="text-4xl font-bold tracking-tight text-white drop-shadow-sm">
+            Login
           </h1>
-          <p className="text-zinc-400 text-sm">
-            Sign in to your NextShop account
-          </p>
         </div>
         
         <LoginForm />
