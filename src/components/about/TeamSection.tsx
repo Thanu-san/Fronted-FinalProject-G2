@@ -28,7 +28,7 @@ export default function TeamSection() {
     <section className="relative overflow-hidden py-16 sm:py-24">
       {/* Decorative ambient background glows */}
       <div
-        className="pointer-events-none absolute -top-40 -left-40 h-[500px] w-[500px] rounded-full bg-emerald-500/10 blur-[120px]"
+        className="pointer-events-none absolute -top-40 -left-40 h-[500px] w-[500px] rounded-full bg-[#8B5CF6]/10 blur-[120px]"
         aria-hidden="true"
       />
       <div
@@ -36,7 +36,7 @@ export default function TeamSection() {
         aria-hidden="true"
       />
       <div
-        className="pointer-events-none absolute -bottom-40 left-1/3 h-[500px] w-[500px] rounded-full bg-amber-500/10 blur-[130px]"
+        className="pointer-events-none absolute -bottom-40 left-1/3 h-[500px] w-[500px] rounded-full bg-[#8B5CF6]/10 blur-[130px]"
         aria-hidden="true"
       />
 
@@ -45,16 +45,16 @@ export default function TeamSection() {
             SECTION 1: OUR MENTOR (Teacher Sokcheat)
         ================================================================ */}
         <div className="text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-50/80 dark:bg-emerald-950/40 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-300 shadow-xs backdrop-blur-xs">
-            <GraduationCap className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#C7D2FE] bg-[#EEF2FF] px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-[#4F46E5] shadow-xs backdrop-blur-xs">
+            <GraduationCap className="w-4 h-4 text-[#4F46E5]" />
             <span>Guidance & Advisory</span>
           </div>
 
-          <h2 className="mt-4 text-3xl font-black tracking-tight text-zinc-900 dark:text-white sm:text-4xl lg:text-5xl">
+          <h2 className="mt-4 text-3xl font-black tracking-tight text-[#0F172A] sm:text-4xl lg:text-5xl">
             Our Mentor
           </h2>
 
-          <p className="mx-auto mt-4 max-w-xl text-base text-zinc-600 dark:text-zinc-400">
+          <p className="mx-auto mt-4 max-w-xl text-base text-[#64748B]">
             Guiding our journey with industry expertise, technical excellence, and dedication to mentoring software engineers at ISTAD.
           </p>
         </div>
@@ -73,62 +73,22 @@ export default function TeamSection() {
               <MemberCard member={mentor} featured />
             </motion.div>
           ))}
-        </div>
-
-        {/* ================================================================
-            TEAM STATS / CREDIBILITY BANNER
-        ================================================================ */}
-        <div className="mt-18 sm:mt-20 rounded-3xl border border-zinc-200/80 dark:border-white/10 bg-gradient-to-r from-zinc-50 via-white to-zinc-50 dark:from-zinc-900/60 dark:via-zinc-900 dark:to-zinc-900/60 p-6 sm:p-8 shadow-sm backdrop-blur-md max-w-3xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-zinc-200 dark:divide-zinc-800">
-            <div className="pt-4 md:pt-0">
-              <div className="text-3xl sm:text-4xl font-black text-emerald-600 dark:text-emerald-400">
-                01
-              </div>
-              <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
-                IT Mentor
-              </p>
-            </div>
-            <div className="pt-4 md:pt-0 md:pl-6">
-              <div className="text-3xl sm:text-4xl font-black text-amber-500 dark:text-amber-400">
-                01
-              </div>
-              <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
-                Team Leader
-              </p>
-            </div>
-            <div className="pt-4 md:pt-0 md:pl-6">
-              <div className="text-3xl sm:text-4xl font-black text-amber-500 dark:text-amber-400">
-                01
-              </div>
-              <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
-                Sub-Leader
-              </p>
-            </div>
-            <div className="pt-4 md:pt-0 md:pl-6">
-              <div className="text-3xl sm:text-4xl font-black text-indigo-600 dark:text-indigo-400">
-                04
-              </div>
-              <p className="mt-1 text-xs font-semibold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
-                Junior Devs
-              </p>
-            </div>
-          </div>
-        </div>
+        </div>  
 
         {/* ================================================================
             SECTION 2: OUR TEAM (2 Cards Per Row, Compact Width)
         ================================================================ */}
         <div className="mt-18 sm:mt-20 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-primary dark:text-primary-light shadow-xs backdrop-blur-xs">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#C7D2FE] bg-[#EEF2FF] px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-primary shadow-xs backdrop-blur-xs">
             <Sparkles className="w-4 h-4 text-primary" />
             <span>Group 2 Engineers</span>
           </div>
 
-          <h2 className="mt-4 text-3xl font-black tracking-tight text-zinc-900 dark:text-white sm:text-4xl lg:text-5xl">
+          <h2 className="mt-4 text-3xl font-black tracking-tight text-[#0F172A] sm:text-4xl lg:text-5xl">
             Our Team
           </h2>
 
-          <p className="mx-auto mt-4 max-w-xl text-base text-zinc-600 dark:text-zinc-400">
+          <p className="mx-auto mt-4 max-w-xl text-base text-[#64748B]">
             The 6 passionate engineers transforming requirements into clean code, interactive interfaces, and robust digital systems.
           </p>
 
@@ -138,8 +98,8 @@ export default function TeamSection() {
               onClick={() => setActiveTab("all")}
               className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
                 activeTab === "all"
-                  ? "bg-primary text-white shadow-md shadow-primary/25 scale-105"
-                  : "border border-zinc-200 dark:border-zinc-700 bg-white/80 dark:bg-zinc-800/80 text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700"
+                  ? "bg-[#4F46E5] text-white shadow-md shadow-[#4F46E5]/25 hover:bg-[#4338CA] scale-105"
+                  : "border border-[#E2E8F0] bg-[#FFFFFF] text-[#64748B] hover:bg-[#EEF2FF] hover:text-[#4F46E5]"
               }`}
             >
               <Users className="w-4 h-4" />
@@ -150,8 +110,8 @@ export default function TeamSection() {
               onClick={() => setActiveTab("leaders")}
               className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
                 activeTab === "leaders"
-                  ? "bg-amber-500 text-white shadow-md shadow-amber-500/25 scale-105"
-                  : "border border-zinc-200 dark:border-zinc-700 bg-white/80 dark:bg-zinc-800/80 text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700"
+                  ? "bg-[#4F46E5] text-white shadow-md shadow-[#4F46E5]/25 hover:bg-[#4338CA] scale-105"
+                  : "border border-[#E2E8F0] bg-[#FFFFFF] text-[#64748B] hover:bg-[#EEF2FF] hover:text-[#4F46E5]"
               }`}
             >
               <ShieldCheck className="w-4 h-4" />
@@ -162,8 +122,8 @@ export default function TeamSection() {
               onClick={() => setActiveTab("members")}
               className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
                 activeTab === "members"
-                  ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/25 scale-105"
-                  : "border border-zinc-200 dark:border-zinc-700 bg-white/80 dark:bg-zinc-800/80 text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700"
+                  ? "bg-[#4F46E5] text-white shadow-md shadow-[#4F46E5]/25 hover:bg-[#4338CA] scale-105"
+                  : "border border-[#E2E8F0] bg-[#FFFFFF] text-[#64748B] hover:bg-[#EEF2FF] hover:text-[#4F46E5]"
               }`}
             >
               <Code className="w-4 h-4" />

@@ -115,12 +115,12 @@ export default function AboutPage() {
       {/* Closing call to action */}
       <section aria-labelledby="cta-heading" className="pt-10 pb-16 md:pt-14 md:pb-24">
         <Container>
-          <div className="relative overflow-hidden rounded-3xl bg-primary-600 px-6 py-12 text-center sm:px-12 sm:py-16">
+          <div className="relative overflow-hidden rounded-3xl bg-[linear-gradient(135deg,#4F46E5_0%,#8B5CF6_100%)] px-6 py-12 text-center sm:px-12 sm:py-16">
             {/* Decorative background shapes, hidden from assistive tech */}
             <div aria-hidden="true" className="pointer-events-none absolute inset-0">
               <div className="absolute -top-16 -left-16 h-64 w-64 rounded-full bg-primary-500/30 blur-3xl" />
               <div className="absolute -bottom-20 -right-16 h-72 w-72 rounded-full bg-lavender/20 blur-3xl" />
-              <div className="absolute top-6 right-8 h-20 w-20 rounded-full bg-pop-green/25" />
+              <div className="absolute top-6 right-8 h-20 w-20 rounded-full bg-[#EEF2FF]/25" />
             </div>
 
             <h2
@@ -138,7 +138,7 @@ export default function AboutPage() {
               className={buttonStyles({
                 variant: "success",
                 size: "lg",
-                className: "relative mt-6",
+                className: "relative mt-6 bg-white! text-[#4F46E5]! hover:bg-[#EEF2FF]! active:bg-[#EEF2FF]! focus-visible:outline-white",
               })}
             >
               Shop now
