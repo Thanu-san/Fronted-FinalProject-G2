@@ -10,7 +10,10 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://ishop.cheat.casa"
+    process.env.NEXT_PUBLIC_SITE_URL ||
+      (process.env.VERCEL_URL
+        ? `https://${process.env.VERCEL_URL}`
+        : "https://fronted-final-project-g2.vercel.app")
   ),
   title: {
     template: "%s | NextShop",
@@ -31,7 +34,7 @@ export const metadata: Metadata = {
     "Frontend Final Project Group 2",
   ],
   authors: [{ name: "Group 2 - ISTAD", url: "https://istad.co" }],
-  creator: "Group 2",
+  creator: "Thanu & Group 2",
   publisher: "ISTAD",
   openGraph: {
     type: "website",
