@@ -35,7 +35,7 @@ export async function getProductByUuid(uuid: string): Promise<Product | null> {
   return data;
 }
 
-// The API ignores search parameters, so load its paginated catalog before filtering.
+
 export async function getAllProducts(): Promise<Product[]> {
   const first = await getProducts(0, 250);
   const products = [...first.content];

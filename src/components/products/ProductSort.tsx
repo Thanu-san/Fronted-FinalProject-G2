@@ -10,7 +10,7 @@ const options = [
   { value: "high", label: "Price: High to Low" },
 ];
 
-// A small product-specific dropdown inspired by beUI's motion select.
+
 export default function ProductSort({ value }: { value: string }) {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState(value);

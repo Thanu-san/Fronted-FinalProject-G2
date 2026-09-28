@@ -28,7 +28,7 @@ export interface Product {
   priceOut: number;
   discount: number | null;
   thumbnail: string | null;
-  // Validate image entries: only empty top-level arrays have been observed so far.
+  
   images: unknown[] | null;
   color: { color: string; images: string[] | null }[] | null;
   filteredImage: unknown;

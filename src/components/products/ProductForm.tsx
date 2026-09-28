@@ -3,7 +3,7 @@
 import { useTransition, type ComponentProps } from "react";
 import { useRouter } from "next/navigation";
 
-// Shared by search and filters so both show the same navigation feedback.
+// Shared by search and filters so both show the same navigation 
 export default function ProductForm(props: ComponentProps<"form">) {
   const router = useRouter();
   const [pending, startTransition] = useTransition();
