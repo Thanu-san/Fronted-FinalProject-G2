@@ -39,8 +39,6 @@ export default function ProductCard({ product }: ProductCardProps) {
         aria-label={`View ${product.name}`}
       >
         {imageUrl && !imageFailed ? (
-          // API images come from several external hosts and may fail to load.
-          // eslint-disable-next-line @next/next/no-img-element
           <img src={imageUrl} alt={product.name} loading="lazy" onError={() => setImageFailed(true)} />
         ) : (
           <span className="product-image-fallback" role="img" aria-label={`${product.name}: image unavailable`}>Image unavailable</span>

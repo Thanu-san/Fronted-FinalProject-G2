@@ -44,21 +44,21 @@ export const metadata: Metadata = {
     title: "NextShop | Better Products, Brighter Days",
     description:
       "Explore quality tech, gadgets, and lifestyle essentials with fast delivery and secure checkout. Built by Group 2 for the ISTAD Frontend Final Project.",
-    images: [
-      {
-        url: "/NextShop-Thumbnail.png",
-        width: 1200,
-        height: 630,
-        alt: "NextShop - Modern E-Commerce Platform",
-      },
-    ],
+    // images: [
+    //   {
+    //     url: "/NextShop-Thumbnail.png",
+    //     width: 1200,
+    //     height: 630,
+    //     alt: "NextShop - Modern E-Commerce Platform",
+    //   },
+    // ],
   },
   twitter: {
     card: "summary_large_image",
     title: "NextShop | Modern E-Commerce Platform",
     description:
       "Better Products, Brighter Days. Discover quality tech and lifestyle products on NextShop.",
-    images: ["/NextShop-Thumbnail.png"],
+    // images: ["/NextShop-Thumbnail.png"],
   },
 };
 
